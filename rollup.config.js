@@ -43,7 +43,7 @@ export default {
                 generateScopedName: 'rsw_[hash:base64:2]',
             },
         }),
-        isProd && uglify(),
+        // isProd && uglify(),
         filesize(),
         copy({
             targets: [

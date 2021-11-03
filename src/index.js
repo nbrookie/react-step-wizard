@@ -123,6 +123,23 @@ export default class StepWizard extends PureComponent {
         });
     }
 
+    refreshSteps = () => {
+        const children = this.getSteps();
+        const newState = {
+            hashKeys: {},
+            namedSteps: {},
+        };
+        children.forEach((child, i) => {
+            // Create hashKey map
+            newState.hashKeys[i] = (child.props && child.props.hashKey) || `step${i + 1}`;
+            newState.hashKeys[newState.hashKeys[i]] = i;
+            // Create namedSteps map
+            newState.namedSteps[i] = (child.props && child.props.stepName) || `step${i + 1}`;
+            newState.namedSteps[newState.namedSteps[i]] = i;
+        });
+        this.setState({ ...newState });
+    }
+
     onStepChange = (stats) => {
         // User callback
         this.props.onStepChange(stats);
